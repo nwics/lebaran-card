@@ -21,7 +21,7 @@ const FontLink = () => {
   return null;
 };
 
-const TARGET_DATE = new Date(2026, 1, 21, 6, 0, 0);
+const TARGET_DATE = new Date(2026, 2, 21, 6, 0, 0);
 
 const getTimeLeft = (target) => {
   const diff = target - Date.now();
