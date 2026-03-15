@@ -1,15 +1,38 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import Moon from "../utils/Moon"
 import Reveal from "../utils/Reveal"
 import GoldBar from "../utils/Goldbar"
+import EnvelopeSeal from "./EnvelopeSeal"
+import FinalScreen from "./FinalScreen"
 
-const MainPage = (visible) => {
+const MainPage = ({ visible, onRestart }) => {
 
     const [miniFirework, setMiniFirework] = useState(false)
+    const [showSeal, setShowSeal] = useState(false);
+    const [showFinal, setShowFinal] = useState(false);
+    const [closeVisible, setCloseVisible] = useState(false);
+    const closeRef = useRef(null);
+
+    useEffect(() => {
+        const el = closeRef.current;
+        if (!el) return;
+        const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setCloseVisible(true); }, { threshold: 0.4 });
+        obs.observe(el);
+        return () => obs.disconnect();
+    }, []);
+
     const handleMiniFirework = () => {
         setMiniFirework(true)
         setTimeout(() => setMiniFirework(false), 100)
     }
+    const handleReset = () => {
+        setShowFinal(false);
+        setShowSeal(false);
+        setCloseVisible(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        onRestart?.();
+    };
+
 
     return (
         <div style={{ opacity: visible ? 1 : 0, transition: "opacity 1s ease", pointerEvents: visible ? "auto" : "none", minHeight: "100vh", position: "relative" }}>
@@ -57,26 +80,26 @@ const MainPage = (visible) => {
             {/* PERSONAL NOTE */}
             <section style={{ maxWidth: 520, margin: "0 auto", padding: "80px 28px" }}>
                 <Reveal>
-                    <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 10, letterSpacing: 4, color: "#C8A96E", textTransform: "uppercase", marginBottom: 20 }}>Khusus untukmu</div>
+                    <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 10, letterSpacing: 4, color: "#C8A96E", textTransform: "uppercase", marginBottom: 20 }}>Ceritanya Greeting Card</div>
                     <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(28px,8vw,40px)", fontStyle: "italic", color: "#F5EDD6", marginBottom: 28, lineHeight: 1.2 }}>
-                        Sayangku,
+                        Eid Mubarak Sis,
                     </div>
                     <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, lineHeight: 1.95, color: "rgba(253,251,247,.75)" }}>
-                        <p>Di hari yang fitri ini, aku ingin kamu tahu bahwa kamu adalah salah satu hal terbaik yang hadir dalam hidupku.</p>
+                        <p>Selamat lebaran yakkk, mohon maaf lahir batin kalau selama ini aku ada salah dari kata atau perbuatan entah yang disengaja atau ngga sengaja. Tenkyuu yakk udah mau ngeluangin waktu buat diajak kemana ae sama mon maap kalau kadang kebanyakan cerita random wkwkwkwk.</p>
                     </div>
                 </Reveal>
 
                 <Reveal delay={0.2}>
                     <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, lineHeight: 1.95, color: "rgba(253,251,247,.75)", marginTop: 16 }}>
-                        <p>Setiap momen bersamamu terasa lebih berharga — dan di hari yang penuh berkah ini, aku bersyukur bisa merayakannya denganmu.</p>
+                        <p>Semoga ibadah bulan puasa tahun ini diterima oleh Allah SWT, dan semoga tahun depan masih bisa ngerayain momen lebaran lagi. </p>
                     </div>
                 </Reveal>
-
+                {/* 
                 <Reveal delay={0.3}>
                     <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, lineHeight: 1.95, color: "rgba(253,251,247,.75)", marginTop: 16 }}>
-                        <p>Semoga Allah SWT menerima seluruh amal ibadah kita, mengampuni segala khilaf kita, dan mempertemukan kita kembali di Lebaran-Lebaran berikutnya dengan kebahagiaan yang lebih. 🤍</p>
+                        <p>Ceritanya greeting card tapi kalau isinya cuman 2 baris dikit banget bjirr jadi yaudah lahh ya tambahin biar keliatan kayak rada panjang gituu soalnya ngga tau mau diisi apaan lagi wkwkwkwk</p>
                     </div>
-                </Reveal>
+                </Reveal> */}
 
                 {/* <SecretMessage onReveal={handleSecretReveal} /> */}
             </section>
@@ -85,7 +108,7 @@ const MainPage = (visible) => {
             <div style={{ height: 1, background: "rgba(200,169,110,.15)", maxWidth: 520, margin: "0 auto" }} />
 
             {/* STATS / FUN BARS */}
-            <section style={{ maxWidth: 520, margin: "0 auto", padding: "80px 28px" }}>
+            {/* <section style={{ maxWidth: 520, margin: "0 auto", padding: "80px 28px" }}>
                 <Reveal>
                     <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 10, letterSpacing: 4, color: "#C8A96E", textTransform: "uppercase", marginBottom: 32 }}>Seberapa spesial kamu bagiku</div>
                 </Reveal>
@@ -93,7 +116,7 @@ const MainPage = (visible) => {
                 <GoldBar label="Rasa syukur karena kamu" value={99} delay={0.25} />
                 <GoldBar label="Kerinduan untukmu" value={97} delay={0.4} />
                 <GoldBar label="Doa terbaik untukmu" value={100} delay={0.55} />
-            </section>
+            </section> */}
 
             {/* GOLD RULE */}
             <div style={{ height: 1, background: "rgba(200,169,110,.15)", maxWidth: 520, margin: "0 auto" }} />
@@ -116,34 +139,45 @@ const MainPage = (visible) => {
             <div style={{ height: 1, background: "rgba(200,169,110,.15)", maxWidth: 520, margin: "0 auto" }} />
 
             {/* INTERACTIVE HEART ZONE */}
-            <section style={{ maxWidth: 520, margin: "0 auto", padding: "80px 28px" }}>
+            {/* <section style={{ maxWidth: 520, margin: "0 auto", padding: "80px 28px" }}>
                 <Reveal>
                     <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 10, letterSpacing: 4, color: "#C8A96E", textTransform: "uppercase", marginBottom: 16, textAlign: "center" }}>
                         Sebuah sentuhan untuk kamu
                     </div>
                     <div style={{ position: "relative", border: "1px solid rgba(200,169,110,.2)", borderRadius: 12, padding: "50px 20px", textAlign: "center", overflow: "hidden", background: "rgba(255,253,247,.03)", cursor: "pointer" }}>
-                        {/* <HeartBurst /> */}
+                        <HeartBurst />
                         <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(36px,10vw,56px)", fontStyle: "italic", color: "#F5EDD6", pointerEvents: "none", userSelect: "none" }}>♡</div>
                         <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, letterSpacing: 2, color: "rgba(253,251,247,.35)", marginTop: 12, pointerEvents: "none" }}>Ketuk di sini</div>
                     </div>
                 </Reveal>
-            </section>
+            </section> */}
 
             {/* SIGN OFF */}
-            <section style={{ padding: "80px 28px 120px", textAlign: "center" }}>
+            {/* <section style={{ padding: "80px 28px 120px", textAlign: "center" }}>
                 <Reveal>
                     <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, letterSpacing: 4, color: "rgba(253,251,247,.35)", textTransform: "uppercase", marginBottom: 16 }}>Dengan cinta tulus, dari</div>
                     <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(28px,8vw,42px)", fontStyle: "italic", color: "#FDFBF7" }}>
                         — namamu —
                     </div>
                     <div style={{ fontSize: 22, color: "#C8A96E", marginTop: 20, animation: "heartbeat 2.5s ease infinite" }}>♡</div>
-                    {/* <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, letterSpacing: 3, color: "rgba(253,251,247,.18)", marginTop: 36 }}>
+                    <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, letterSpacing: 3, color: "rgba(253,251,247,.18)", marginTop: 36 }}>
                         RAMADAN 1446 H · 2025
-                    </div> */}
+                    </div>
                 </Reveal>
-            </section>
+            </section> */}
 
             {miniFirework && <FireworksCanvas active={true} />}
+            {showSeal && <EnvelopeSeal onComplete={() => { setShowSeal(false); setShowFinal(true); }} />}
+            {showFinal && <FinalScreen onReset={handleReset} />}
+
+            <div ref={closeRef} style={{ padding: "20px 28px 100px", textAlign: "center", opacity: closeVisible ? 1 : 0, transform: closeVisible ? "none" : "translateY(30px)", transition: "opacity 1.2s ease, transform 1.2s ease" }}>
+                <div style={{ height: 1, background: "linear-gradient(to right,transparent,rgba(200,169,110,.2),transparent)", maxWidth: 320, margin: "0 auto 40px" }} />
+                <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: "rgba(253,251,247,.25)", letterSpacing: 1, marginBottom: 8 }}>Kamu sudah membaca sampai akhir</div>
+                <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 16, fontStyle: "italic", color: "rgba(200,169,110,.5)", marginBottom: 32 }}>Terima kasih sudah membaca</div>
+                <button onClick={() => setShowSeal(true)} style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, letterSpacing: 3, color: "#C8A96E", textTransform: "uppercase", padding: "18px 44px", border: "1px solid rgba(200,169,110,.35)", borderRadius: 2, background: "rgba(8,8,22,.9)", cursor: "pointer", animation: "closePulse 2.5s ease infinite" }}>
+                    ✦ &nbsp;Tutup Surat
+                </button>
+            </div>
 
         </div>
     )

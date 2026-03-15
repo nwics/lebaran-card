@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const EnvelopeScreen = (onOpen) => {
+const EnvelopeScreen = ({ onOpen }) => {
     const [opening, setOpening] = useState(false);
     const [gone, setGone] = useState(false);
 
@@ -38,7 +38,7 @@ const EnvelopeScreen = (onOpen) => {
           `}</style>
 
             <div className="env-pre" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, letterSpacing: 5, color: "#C8A96E", textTransform: "uppercase", marginBottom: 36 }}>
-                Sebuah surat spesial untukmu
+                Ceritanya bikin Greeting card gituu
             </div>
 
             <div className="env-wrap" onClick={handleOpen} style={{ cursor: "pointer", position: "relative", width: 260, height: 185, filter: "drop-shadow(0 0 30px rgba(200,169,110,.18))" }}>

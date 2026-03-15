@@ -21,7 +21,7 @@ const FontLink = () => {
   return null;
 };
 
-const TARGET_DATE = new Date(2026, 1, 22, 6, 0, 0);
+const TARGET_DATE = new Date(2026, 1, 21, 6, 0, 0);
 
 const getTimeLeft = (target) => {
   const diff = target - Date.now();
@@ -93,8 +93,7 @@ function App() {
         {phase === "envelope" && (
           <EnvelopeScreen onOpen={handleEnvelopeOpen} />
         )}
-        {/* <MainPage visible={opened} /> */}
-        <MainPage visible={phase === "main"} />
+        <MainPage visible={phase === "main"} onRestart={() => setPhase("envelope")} />
       </div>
     </>
   )
