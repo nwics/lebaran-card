@@ -84,7 +84,7 @@ function App() {
         <StarField />
         <Petals />
         <Lanterns />
-        <FireworksCanvas active={showFireworks} />
+        {/* <FireworksCanvas active={showFireworks} /> */}
 
         {phase === "countdown" && (
           <CountdownScreen timeLeft={timeLeft} onUnlock={() => setPhase("envelope")} />

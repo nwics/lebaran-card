@@ -36,24 +36,24 @@ const CountdownScreen = ({ timeLeft, onUnlock }) => {
             opacity: justUnlocked ? 0 : 1,
         }}>
             <style>{`
-                @keyframes cdIn      { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
-                @keyframes lockPulse { 0%,100%{box-shadow:0 0 20px rgba(200,169,110,.15)} 50%{box-shadow:0 0 45px rgba(200,169,110,.4)} }
-                @keyframes shake     { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
-                @keyframes ringGlow  { 0%,100%{filter:drop-shadow(0 0 6px rgba(200,169,110,.3))} 50%{filter:drop-shadow(0 0 18px rgba(200,169,110,.7))} }
-                @keyframes unlockPop { 0%{transform:scale(1)} 40%{transform:scale(1.3)} 70%{transform:scale(0.9)} 100%{transform:scale(1.15)} }
-                @keyframes digitFlip { 0%{transform:translateY(-6px);opacity:0} 100%{transform:translateY(0);opacity:1} }
-                @keyframes shimmerGold { 0%{background-position:200% center} 100%{background-position:-200% center} }
-                @keyframes shimLine { 0%{left:-100%} 100%{left:200%} }
+                    @keyframes cdIn      { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+                    @keyframes lockPulse { 0%,100%{box-shadow:0 0 20px rgba(200,169,110,.15)} 50%{box-shadow:0 0 45px rgba(200,169,110,.4)} }
+                    @keyframes shake     { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+                    @keyframes ringGlow  { 0%,100%{filter:drop-shadow(0 0 6px rgba(200,169,110,.3))} 50%{filter:drop-shadow(0 0 18px rgba(200,169,110,.7))} }
+                    @keyframes unlockPop { 0%{transform:scale(1)} 40%{transform:scale(1.3)} 70%{transform:scale(0.9)} 100%{transform:scale(1.15)} }
+                    @keyframes digitFlip { 0%{transform:translateY(-6px);opacity:0} 100%{transform:translateY(0);opacity:1} }
+                    @keyframes shimmerGold { 0%{background-position:200% center} 100%{background-position:-200% center} }
+                    @keyframes shimLine { 0%{left:-100%} 100%{left:200%} }
 
-                .shimmer-gold {
-                    background: linear-gradient(90deg, #C8A96E 0%, #F5EDD6 40%, #C8A96E 60%, #E8D5A3 100%);
-                    background-size: 200% auto;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    background-clip: text;
-                    animation: shimmerGold 3s linear infinite;
-                }
-            `}</style>
+                    .shimmer-gold {
+                        background: linear-gradient(90deg, #C8A96E 0%, #F5EDD6 40%, #C8A96E 60%, #E8D5A3 100%);
+                        background-size: 200% auto;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                        animation: shimmerGold 3s linear infinite;
+                    }
+                `}</style>
 
             {/* top label */}
             <div style={{
@@ -190,18 +190,18 @@ const CountdownScreen = ({ timeLeft, onUnlock }) => {
 
                     {/* message */}
                     {/* <div style={{ textAlign: "center", maxWidth: 280, animation: "cdIn .8s .8s ease both" }}>
-                        <div style={{ fontFamily: "'Playfair Display',serif", fontSize: 18, fontStyle: "italic", color: "#fda4af", marginBottom: 10 }}>
-                            Sabar ya, bestie! 🌸
-                        </div>
-                        <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 13, color: "rgba(249,168,212,.45)", lineHeight: 1.7, fontWeight: 400 }}>
-                            Ada sesuatu spesial yang menunggumu saat 1 Syawal tiba. Jangan dibuka dulu ya! 🔒
-                        </div>
-                    </div> */}
+                            <div style={{ fontFamily: "'Playfair Display',serif", fontSize: 18, fontStyle: "italic", color: "#fda4af", marginBottom: 10 }}>
+                                Sabar ya, bestie! 🌸
+                            </div>
+                            <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: 13, color: "rgba(249,168,212,.45)", lineHeight: 1.7, fontWeight: 400 }}>
+                                Ada sesuatu spesial yang menunggumu saat 1 Syawal tiba. Jangan dibuka dulu ya! 🔒
+                            </div>
+                        </div> */}
 
                     {/* tap hint */}
                     {/* <div style={{ marginTop: 24, fontFamily: "'Nunito',sans-serif", fontSize: 11, color: "rgba(249,168,212,.22)", letterSpacing: 2, animation: "cdIn .8s 1s ease both" }}>
-                        coba ketuk kalau penasaran 👀
-                    </div> */}
+                            coba ketuk kalau penasaran 👀
+                        </div> */}
 
                     {/* locked message on shake */}
                     {shaking && (
